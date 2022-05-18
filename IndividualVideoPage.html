@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video</title>
+</head>
+<body>
+    <div id="videoDisplay">
+
+    </div>
+</body>
+
+<script>
+    const videoId = localStorage.getItem("videoId") ? JSON.parse(localStorage.getItem("videoId")) : "";
+    
+    let videoDisplay=document.getElementById("videoDisplay");
+
+    let videoFrame=document.createElement("iframe");
+
+    videoFrame.src=`https://www.youtube.com/embed/${videoId}`;
+    videoFrame.width="100%";
+    videoFrame.height="500px";
+
+    videoDisplay.append(videoFrame);
+
+
+
+</script>
+</html>

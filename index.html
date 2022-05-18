@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body onload="search2()">
+    <div id="navbar">
+        <!-- Left part -->
+        <div id="nav_left">
+            <div><img id="left1" src="https://css-tricks.com/wp-content/uploads/2012/10/threelines.png"></div>
+            <div><img id="left2" src="https://download.logo.wine/logo/YouTube/YouTube-Logo.wine.png"></div>
+        </div>
+        <!-- Center part -->
+        <div id="nav_middle">
+            <div>
+                <input type="text" id="searchInput" placeholder="Search..." name="search">
+
+                <img id="input" src="https://img.icons8.com/ios-glyphs/452/search--v1.png" onclick="search()" alt="">
+                </input>
+
+            </div>
+            <div id="nav_middle_right">
+
+                <img src="https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png">
+            </div>
+        </div>
+        <!-- Right part -->
+        <div id="nav_right">
+            <div><img
+                    src="https://previews.123rf.com/images/martialred/martialred1810/martialred181000014/113393140-agregue-un-nuevo-video-o-cargue-una-pel%C3%ADcula-cree-un-%C3%ADcono-de-vector-de-arte-de-l%C3%ADnea-de-medios-para.jpg"
+                    style="width: 40px; ;">
+            </div>
+            <div><img src="https://icon-library.com/images/google-apps-icon-png/google-apps-icon-png-27.jpg"></div>
+            <div><img
+                    src="https://previews.123rf.com/images/illizium/illizium1903/illizium190300113/119765682-notification-icon-vector-bell-icons-in-line.jpg">
+            </div>
+        </div>
+    </div>
+
+    <div id="container">
+
+    </div>
+
+</body>
+
+<script>
+
+    
+
+    let key = "AIzaSyBKHK1bu7x9RYbU0v45HGtWOnv4GRfMeCM";
+
+
+    // api fecth data for serch bar
+    const search = async () => {
+        try {
+            const searchInput = document.getElementById("searchInput").value;
+            console.log(searchInput);
+
+            const url = `https://youtube.googleapis.com/youtube/v3/search?key=${key}&maxResults=20&type=video&q=${searchInput}&part=snippet`;
+            let res = await fetch(url);
+            let data = await res.json();
+            console.log(data.items)
+            displayData(data.items);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    // api fecth most popular video
+    const search2 = async () => {
+        try {
+            const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=IN&maxResults=20&type=video&part=snippet&key=AIzaSyBKHK1bu7x9RYbU0v45HGtWOnv4GRfMeCM`;
+            let res = await fetch(url);
+            let data = await res.json();
+            console.log(data.items)
+            displayData2(data.items);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    // search data display function
+    const displayData = (data) => {
+        const container = document.getElementById("container");
+        container.innerText = " ";
+        data.forEach(video => {
+            const videobox = document.createElement("div");
+            const thumbnails = document.createElement("img");
+            thumbnails.src = video.snippet.thumbnails.medium.url;
+            const videoTitle = document.createElement("p");
+            videoTitle.innerText = video.snippet.title;
+
+            videobox.onclick = () => {
+                localStorage.setItem("videoId", JSON.stringify(video.id.videoId));
+                location.href = "IndividualVideoPage.html";
+            }
+
+            videobox.append(thumbnails, videoTitle);
+
+            container.append(videobox);
+
+        });
+    }
+
+    // most popular data disply some change 
+    const displayData2 = (data) => {
+        const container = document.getElementById("container");
+        container.innerText = " ";
+        data.forEach(video => {
+            const videobox = document.createElement("div");
+            const thumbnails = document.createElement("img");
+            thumbnails.src = video.snippet.thumbnails.medium.url;
+            const videoTitle = document.createElement("p");
+            videoTitle.innerText = video.snippet.title;
+
+            videobox.onclick = () => {
+                localStorage.setItem("videoId", JSON.stringify(video.id));
+                location.href = "IndividualVideoPage.html";
+            }
+
+            videobox.append(thumbnails, videoTitle);
+
+            container.append(videobox);
+
+        });
+    }
+
+
+
+</script>
+
+</html>
+
+
+<!-- {
+            "kind": "youtube#searchResult",
+            "etag": "8FJLcpHvk0f5s7zQ-7gqOr521ds",
+            "id": {
+                "kind": "youtube#video",
+                "videoId": "t8E0pEc-FFY"
+            },
+            "snippet": {
+                "publishedAt": "2022-04-04T13:16:58Z",
+                "channelId": "UChMU-aFKCoQyPOQzYph35YA",
+                "title": "Masai School Complete Information | Masai School Updates 2022 &amp; Masai School New ISA Rules 2022",
+                "description": "Masai School Complete Information | Masai School Updates 2022 & Masai School New Rules 2022} ****** Get a flat 10% ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/t8E0pEc-FFY/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/t8E0pEc-FFY/mqdefault.jpg",
+                        "width": 320,
+                        "height": 180
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/t8E0pEc-FFY/hqdefault.jpg",
+                        "width": 480,
+                        "height": 360
+                    }
+                },
+                "channelTitle": "The Engineer Guy 2.0",
+                "liveBroadcastContent": "none",
+                "publishTime": "2022-04-04T13:16:58Z"
+            }
+        }, 
+    
+    
+    
+    GET https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&key=[YOUR_API_KEY] HTTP/1.1
+
+Authorization: Bearer [YOUR_ACCESS_TOKEN]
+Accept: application/json
+
+    -->

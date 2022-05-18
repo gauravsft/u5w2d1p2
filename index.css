@@ -1,0 +1,77 @@
+*{
+    margin: 0%;
+}
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    height: 55px;
+    background-color:whitesmoke;
+}
+#nav_left{
+    display: flex;
+    float: left;
+}
+#left2{
+    margin-top: -20px;
+    width:140px;
+}
+#left1{
+    margin-top: 10px;
+    width:40px;
+}
+
+#nav_middle{
+    display: flex;
+    float: center;
+    margin-top:0px;
+}
+#nav_middle >div>input{
+    width:500px;
+    height:30px;
+    margin-bottom: 10px;
+
+}
+#input {
+    margin-top: 10px;
+    margin-left: -40px;
+    margin-right: 10px;
+    margin-bottom: -14px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+#nav_middle img{
+    width: 34px;
+}
+#nav_right{
+    display: flex;
+    float:right;
+    margin-top: 12px;
+   
+}
+#nav_right>div img{
+    width:30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#nav_middle_right{
+    margin-top: 10px;
+}
+
+
+#container{
+    
+    display: grid;
+    height: 400px;
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-left: 5%;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    
+}
+#container>img{
+    width: 100%;
+}
